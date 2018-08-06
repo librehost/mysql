@@ -19,6 +19,8 @@ services:
       database:
         aliases:
          - mysql
+         - ${COMPOSE_PROJECT_NAME:?err}
+         - ${COMPOSE_PROJECT_NAME:?err}_mysql
     labels:
       # shipy labels must be present on all services
       # shipy.stack.id must be equal the name of the repository
