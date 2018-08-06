@@ -8,7 +8,7 @@ services:
       context: ./
       dockerfile: Dockerfile.mysql
       args:
-        VERSION: ${SHIPY_STACK_SERVICE_1_VERSION:-latest}
+        VERSION: ${SHIPY_STACK_SERVICE_1_VERSION:-5}
     expose:
       - "3306"
     restart: always
