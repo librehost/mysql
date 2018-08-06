@@ -1,0 +1,47 @@
+version: '2.4' # Cant use 3+ because it does not support resource-limits without swarm-mode: https://github.com/docker/compose/issues/4513
+
+services:
+
+  mysql:
+    mem_limit: ${SHIPY_STACK_SERVICE_1_MEMORY_LIMIT:-1000000000}
+    build:
+      context: ./
+      dockerfile: Dockerfile.mysql
+      args:
+        VERSION: ${SHIPY_STACK_SERVICE_1_VERSION:-latest}
+    expose:
+      - "3306"
+    restart: always
+    volumes:
+      - mysqlconf:/etc/mysql
+      - mysqldata:/var/lib/mysql
+    networks:
+      database:
+        aliases:
+         - mysql
+    labels:
+      # shipy labels must be present on all services
+      # shipy.stack.id must be equal the name of the repository
+      - "shipy.stack.id=${COMPOSE_PROJECT_NAME:?err}"
+      - "shipy.stack.name=${COMPOSE_PROJECT_NAME:?err}"
+      - "shipy.stack.domains=${SHIPY_STACK_DOMAINS:?err}"
+      - "shipy.stack.json=${SHIPY_STACK_JSON:?err}"
+      - "shipy.stack.service.number=1"
+      - "shipy.stack.service.name=${COMPOSE_PROJECT_NAME:?err}_mysql"
+      - "shipy.stack.service.version=${SHIPY_STACK_SERVICE_1_VERSION:-latest}"
+    #command: --logLevel=DEBUG
+    #healthcheck:
+      #test: ["CMD", "traefik", "healthcheck"]
+      #interval: 10s
+      #timeout: 30s
+      #retries: 3
+      #start_period: 5s
+
+volumes:
+  mysql:
+
+networks:
+  database:
+      name: database # named networks will not get removed on container update/removal
+      
+  
