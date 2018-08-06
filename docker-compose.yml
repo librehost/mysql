@@ -18,7 +18,6 @@ services:
     networks:
       database:
         aliases:
-         - mysql
          - ${COMPOSE_PROJECT_NAME:?err}
          - ${COMPOSE_PROJECT_NAME:?err}_mysql
     env_file:
