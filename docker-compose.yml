@@ -47,6 +47,7 @@ volumes:
 
 networks:
   database:
+      external: true
       name: database # named networks will not get removed on container update/removal
       
   
