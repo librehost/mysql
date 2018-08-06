@@ -40,7 +40,8 @@ services:
       #start_period: 5s
 
 volumes:
-  mysql:
+  mysqlconf:
+  mysqldata:
 
 networks:
   database:
