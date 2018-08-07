@@ -34,12 +34,12 @@ services:
       - "shipy.stack.service.name=${COMPOSE_PROJECT_NAME:?err}_mysql"
       - "shipy.stack.service.version=${SHIPY_STACK_SERVICE_1_VERSION:-latest}"
     #command: --logLevel=DEBUG
-    #healthcheck:
-      #test: ["CMD", "traefik", "healthcheck"]
-      #interval: 10s
-      #timeout: 30s
-      #retries: 3
-      #start_period: 5s
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=rootpasswd --execute \"SHOW DATABASES;\""
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
 
 volumes:
   mysqlconf:
