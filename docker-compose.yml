@@ -35,7 +35,7 @@ services:
       - "shipy.stack.service.version=${SHIPY_STACK_SERVICE_1_VERSION:-latest}"
     #command: --logLevel=DEBUG
     healthcheck:
-      test: "/usr/bin/mysql --user=root --password=rootpasswd --execute \"SHOW DATABASES;\""
+      test: "/usr/bin/mysql --user=root --password=${MYSQL_ROOT_PASSWORD:?err} --execute \"SHOW DATABASES;\""
       interval: 10s
       timeout: 10s
       retries: 3
