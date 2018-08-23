@@ -32,7 +32,7 @@ services:
       - "shipy.stack.json=${SHIPY_STACK_JSON:?err}"
       - "shipy.stack.service.number=1"
       - "shipy.stack.service.name=${COMPOSE_PROJECT_NAME:?err}_mysql"
-      - "shipy.stack.service.version=${SHIPY_STACK_SERVICE_1_VERSION:-latest}"
+      - "shipy.stack.service.version=${SHIPY_STACK_SERVICE_1_VERSION:-5}"
     #command: --logLevel=DEBUG
     healthcheck:
       test: "/usr/bin/mysql --user=root --password=${MYSQL_ROOT_PASSWORD:?err} --execute \"SHOW DATABASES;\""
