@@ -4,11 +4,7 @@ services:
 
   mysql:
     mem_limit: ${SHIPY_STACK_SERVICE_1_MEMORY_LIMIT:-1000000000}
-    build:
-      context: ./
-      dockerfile: Dockerfile.mysql
-      args:
-        VERSION: ${SHIPY_STACK_SERVICE_1_VERSION:-5}
+    image: mysql:${SHIPY_STACK_SERVICE_1_VERSION:-latest}
     expose:
       - "3306"
     restart: always
