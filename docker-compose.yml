@@ -18,7 +18,7 @@ services:
     networks:
       database:
         aliases:
-         - ${COMPOSE_PROJECT_NAME:?err}
+         # alias with pattern PROJECTNAME_SERVICENAME must be present on all networks
          - ${COMPOSE_PROJECT_NAME:?err}_mysql
     env_file:
       - .env
